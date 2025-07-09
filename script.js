@@ -487,7 +487,7 @@ function showPractice(chapter) {
 }
 
 // ==== 5. Inițial: Home ====
-pageTitle.textContent = 'Bine ai venit!';
+pageTitle.textContent = 'Bine ai venit la EduOlymp!';
 content.innerHTML     = '<p>Selectează un capitol și o secțiune din meniul din stânga.</p>';
 
 // 6. Buton Home: revine la ecranul inițial

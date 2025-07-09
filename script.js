@@ -507,6 +507,6 @@ function showHome() {
   // Setează titlul și conținutul Home
   const pageTitle = document.getElementById('page-title');
   const content   = document.getElementById('content');
-  pageTitle.textContent = 'Bine ai venit!';
+  pageTitle.textContent = 'Bine ai venit la EduOlymp!';
   content.innerHTML = '<p>Selectează un capitol și o secțiune din meniul din stânga.</p>';
 }

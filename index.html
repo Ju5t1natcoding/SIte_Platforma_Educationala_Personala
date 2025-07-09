@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Ghid Olimpiadă Info</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sidebar pop‑up -->
+  <div id="sidebar">
+    <div class="logo">Olimpiada Info</div>
+    <nav id="chapters-menu">
+      <!-- capitole generate din JS -->
+    </nav>
+  </div>
+
+  <!-- Overlay semi-transparent -->
+  <div id="overlay"></div>
+
+  <!-- Buton de toggle -->
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <!-- Wrapper pentru main + homescreen -->
+  <div id="wrapper">
+    <header>
+        <h1 id="page-title">Bine ai venit!</h1>
+        <button id="home-button" class="home-btn">🏠 Home</button>
+    </header>
+    <main id="content">
+      <p>Selectează un capitol și o secțiune din meniul din stânga.</p>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

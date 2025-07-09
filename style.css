@@ -1,0 +1,117 @@
+/* Reset simplu */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  color: #333;
+  position: relative;
+  overflow-x: hidden; /* previne scroll orizontal când sidebar e deschis */
+}
+
+/* Sidebar pop‑up */
+#sidebar {
+  position: fixed;
+  top: 0; left: -240px;
+  width: 240px; height: 100%;
+  background: #1e293b;
+  color: #f8fafc;
+  display: flex; flex-direction: column;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+#sidebar.active { left: 0; }
+#sidebar .logo {
+  padding: 1.5rem; font-size: 1.25rem; font-weight: bold;
+  text-align: center; border-bottom: 1px solid #334155;
+}
+#chapters-menu { flex: 1; overflow-y: auto; }
+/* capitole/menu items */
+.chapter { border-bottom: 1px solid #334155; }
+.chapter > .title {
+  padding: 0.75rem 1rem; cursor: pointer; font-weight: 600;
+}
+.chapter > .title:hover { background: #334155; }
+/* Submenu: ascuns implicit */
+.submenu {
+  display: none; flex-direction: column; background: #15202b;
+}
+/* Linkuri teorie/practica */
+.submenu a {
+  padding: 0.5rem 1.5rem;
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  white-space: nowrap;        /* evită wrap haotic */
+  overflow: hidden;
+  text-overflow: ellipsis;    /* „…” dacă e prea lung */
+}
+.submenu a:hover { background: #1e293b; }
+.submenu a[data-status="max"]     { border-left: 4px solid #22c55e; }
+.submenu a[data-status="partial"] { border-left: 4px solid #f97316; }
+.submenu a[data-status="none"]    { border-left: 4px solid #ef4444; }
+
+/* Overlay */
+#overlay {
+  display: none;
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 900;
+}
+#overlay.active { display: block; }
+
+/* Buton toggle */
+.menu-toggle {
+  position: fixed; top: 1rem; left: 1rem;
+  z-index: 1001;
+  background: #1e293b; color: #f8fafc;
+  border: none; padding: 0.5rem 1rem;
+  font-size: 1.25rem; cursor: pointer;
+  border-radius: 0.25rem;
+  transition: left 0.3s ease;
+}
+/* Când meniul e deschis */
+.menu-toggle.shift { left: 241px; }
+
+/* Wrapper (împins de sidebar) */
+#wrapper {
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+}
+#wrapper.shift { margin-left: 240px; }
+
+/* Conținut principal: centrare și limitare lățime */
+#wrapper header,
+#wrapper main {
+  max-width: 800px;       /* limitator de text */
+  margin: 0 auto;         /* centru orizontal */
+}
+#wrapper header {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 1.5rem;      /* text un pic mai mare */
+}
+#wrapper main#content {
+  padding: 1.5rem;
+  font-size: 1.125rem;    /* text mai mare pentru paragraf */
+  line-height: 1.6;       /* mai aerisit */
+}
+
+/* Buton Home */
+.home-btn {
+    margin-left: 1rem;
+    background: #22c55e;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background 0.2s;
+}
+
+.home-btn:hover {
+    background: #16a34a;
+}
+  

@@ -255,7 +255,7 @@ async function showTheory(chapter) {
     // 2) Parsează Markdown în HTML și injectează
     content.innerHTML = `
       <div class="theory-section">
-        ${marked(md)}
+        ${marked.parse(md)}
       </div>
     `;
   } catch (err) {

@@ -1,117 +1,109 @@
-/* Reset simplu */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  color: #333;
-  position: relative;
-  overflow-x: hidden; /* previne scroll orizontal când sidebar e deschis */
+:root {
+  --bg-sidebar: #111827;
+  --text-light: #f3f4f6;
+  --accent: #2563EB;
+  --bg-card: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* Sidebar pop‑up */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #F9FAFB;
+  color: #1F2937;
+  overflow-x: hidden;
+}
+
+/* Sidebar */
 #sidebar {
   position: fixed;
-  top: 0; left: -240px;
-  width: 240px; height: 100%;
-  background: #1e293b;
-  color: #f8fafc;
+  top: 0; bottom: 0; left: 0;
+  width: 260px;
+  background: var(--bg-sidebar);
+  color: var(--text-light);
   display: flex; flex-direction: column;
-  transition: left 0.3s ease;
+  transition: transform .3s ease;
+  transform: translateX(-100%);
   z-index: 1000;
 }
-#sidebar.active { left: 0; }
+#sidebar.active { transform: translateX(0); }
 #sidebar .logo {
-  padding: 1.5rem; font-size: 1.25rem; font-weight: bold;
-  text-align: center; border-bottom: 1px solid #334155;
+  font-size: 1.5rem; font-weight: 700;
+  padding: 1.5rem; text-align: center;
+  border-bottom: 1px solid #374151;
 }
-#chapters-menu { flex: 1; overflow-y: auto; }
-/* capitole/menu items */
-.chapter { border-bottom: 1px solid #334155; }
-.chapter > .title {
-  padding: 0.75rem 1rem; cursor: pointer; font-weight: 600;
-}
-.chapter > .title:hover { background: #334155; }
-/* Submenu: ascuns implicit */
-.submenu {
-  display: none; flex-direction: column; background: #15202b;
-}
-/* Linkuri teorie/practica */
-.submenu a {
-  padding: 0.5rem 1.5rem;
-  text-decoration: none;
-  color: #cbd5e1;
-  font-size: 0.95rem;
-  white-space: nowrap;        /* evită wrap haotic */
-  overflow: hidden;
-  text-overflow: ellipsis;    /* „…” dacă e prea lung */
-}
-.submenu a:hover { background: #1e293b; }
-.submenu a[data-status="max"]     { border-left: 4px solid #22c55e; }
-.submenu a[data-status="partial"] { border-left: 4px solid #f97316; }
-.submenu a[data-status="none"]    { border-left: 4px solid #ef4444; }
+#chapters-menu { overflow-y: auto; }
 
-/* Overlay */
-#overlay {
-  display: none;
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.4);
+/* Capitole */
+.chapter { border-bottom: 1px solid #374151; }
+.chapter > .title {
+  padding: 1rem; cursor: pointer; font-weight: 600;
+  display: flex; justify-content: space-between;
+}
+.chapter > .title:hover { background: #1F2937; }
+.submenu {
+  display: none; flex-direction: column;
+  background: #111827;
+}
+.submenu a {
+  padding: .75rem 1.5rem;
+  text-decoration: none;
+  color: #D1D5DB;
+  font-size: .95rem;
+  transition: background .2s;
+}
+.submenu a:hover { background: #1F2937; }
+
+/* Toggle button */
+.menu-toggle {
+  position: fixed; top: 1.25rem; left: 1.25rem;
+  background: var(--accent); color: white;
+  border: none; padding: .5rem .75rem;
+  border-radius: .375rem; font-size: 1.25rem;
+  cursor: pointer; z-index: 1100;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* Wrapper & Header */
+#wrapper {
+  transition: margin-left .3s ease;
+  margin-left: 0;
+  padding-top: 4rem;
+}
+#wrapper.shift { margin-left: 260px; }
+header {
+  position: sticky; top: 0; background: white;
+  padding: 1rem 2rem; border-bottom: 1px solid #E5E7EB;
+  box-shadow: 0 1px 4px var(--shadow);
   z-index: 900;
 }
-#overlay.active { display: block; }
-
-/* Buton toggle */
-.menu-toggle {
-  position: fixed; top: 1rem; left: 1rem;
-  z-index: 1001;
-  background: #1e293b; color: #f8fafc;
-  border: none; padding: 0.5rem 1rem;
-  font-size: 1.25rem; cursor: pointer;
-  border-radius: 0.25rem;
-  transition: left 0.3s ease;
-}
-/* Când meniul e deschis */
-.menu-toggle.shift { left: 241px; }
-
-/* Wrapper (împins de sidebar) */
-#wrapper {
-  transition: margin-left 0.3s ease;
-  margin-left: 0;
-}
-#wrapper.shift { margin-left: 240px; }
-
-/* Conținut principal: centrare și limitare lățime */
-#wrapper header,
-#wrapper main {
-  max-width: 800px;       /* limitator de text */
-  margin: 0 auto;         /* centru orizontal */
-}
-#wrapper header {
-  background: #fff;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
-  font-size: 1.5rem;      /* text un pic mai mare */
-}
-#wrapper main#content {
-  padding: 1.5rem;
-  font-size: 1.125rem;    /* text mai mare pentru paragraf */
-  line-height: 1.6;       /* mai aerisit */
-}
-
-/* Buton Home */
+header h1 { font-size: 1.75rem; }
 .home-btn {
-    margin-left: 1rem;
-    background: #22c55e;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    transition: background 0.2s;
+  margin-left: 1rem; background: var(--accent);
+  color: white; border: none; padding: .5rem 1rem;
+  border-radius: .375rem; font-size: .95rem;
+  cursor: pointer; transition: background .2s;
+}
+.home-btn:hover { background: #1E40AF; }
+
+/* Content */
+main#content {
+  max-width: 900px; margin: 2rem auto; padding: 0 1rem;
+  line-height: 1.7; font-size: 1.1rem;
+}
+main#content img {
+  max-width: 100%; display: block;
+  margin: 1.5rem auto;
+  border-radius: .375rem;
+  box-shadow: 0 2px 6px var(--shadow);
 }
 
-.home-btn:hover {
-    background: #16a34a;
+/* Cards pentru secțiuni teorie */
+.theory-section {
+  background: var(--bg-card);
+  padding: 1.5rem; margin-bottom: 2rem;
+  border-radius: .5rem;
+  box-shadow: 0 1px 4px var(--shadow);
 }
-  

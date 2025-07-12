@@ -245,26 +245,19 @@ const content   = document.getElementById('content');
 async function showTheory(chapter) {
   pageTitle.textContent = `Teorie – ${chapter.title}`;
   try {
-    // 1) Fetch fișierul .md după chapter.id
     const res = await fetch(`./content/${chapter.id}.md`);
-    if (!res.ok) {
-      throw new Error(`Fișierul Markdown nu a fost găsit: ./content/${chapter.id}.md`);
-    }
+    if (!res.ok) throw new Error(`Status ${res.status}`);
     const md = await res.text();
 
-    // 2) Parsează Markdown în HTML și injectează
-    content.innerHTML = `
-      <div class="theory-section">
-        ${marked.parse(md)}
-      </div>
-    `;
+    // <-- folosește marked.parse() aici -->
+    const html = marked.parse(md);
+    content.innerHTML = `<div class="theory-section">${html}</div>`;
   } catch (err) {
-    console.error(err);
+    console.error('Eroare la fetch/parsing:', err);
     content.innerHTML = `
       <div class="theory-section error">
         <p>Ne pare rău, nu am putut încărca conținutul de teorie.</p>
-      </div>
-    `;
+      </div>`;
   }
 }
 
